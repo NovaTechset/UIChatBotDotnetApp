@@ -1,0 +1,56 @@
+﻿<div id="homeMenu">
+    <h3>Select a Stock Exchange:</h3>
+    <ul id="exchangeList"></ul>
+</div>
+
+<div id="stockMenu" style="display: none;">
+    <h3>Top Stocks:</h3>
+    <ul id="stockList"></ul>
+</div>
+
+<div id="stockDetails" style="display: none;">
+    <h3>Stock Price:</h3>
+    <p id="stockPrice"></p>
+    <button onclick="showStockMenu()">Back to Stock Menu</button>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Load initial data
+        $.getJSON('/Chatbot/GetStockExchanges', function (data) {
+            $.each(data, function (index, item) {
+                $('#exchangeList').append('<li><a href="#" onclick="loadStockMenu(\'' + item.Code + '\')">' + item.StockExchangeName + '</a></li>');
+            });
+        });
+    });
+
+    function loadStockMenu(exchangeCode) {
+        $.getJSON('/Chatbot/GetTopStocks', { exchangeCode: exchangeCode }, function (data) {
+            $('#stockList').empty();
+            $.each(data, function (index, item) {
+                $('#stockList').append('<li><a href="#" onclick="showStockPrice(\'' + item.Code + '\')">' + item.StockName + '</a></li>');
+            });
+            $('#homeMenu').hide();
+            $('#stockMenu').show();
+        });
+    }
+
+    function showStockPrice(stockCode) {
+        $.getJSON('/Chatbot/GetStockPrice', { stockCode: stockCode }, function (data) {
+            $('#stockPrice').text('Current Price: $' + data.toFixed(2));
+            $('#stockDetails').show();
+        });
+    }
+
+    function showStockMenu() {
+        $('#stockDetails').hide();
+        $('#stockMenu').show();
+    }
+
+    // Add functionality to go back to Home Menu
+    $('#homeMenu').on('click', 'a', function () {
+        $('#stockMenu').hide();
+        $('#stockDetails').hide();
+        $('#homeMenu').show();
+    });
+</script>
