@@ -1,7 +1,7 @@
 [
     {
         "code": "LSE",
-        "stockExchange": "London Stock Exchange",
+        "StockExchangeName": "London Stock Exchange",
         "topStocks": [
             {
                 "code": "CRDA",
@@ -32,7 +32,7 @@
     },
     {
         "code": "NYSE",
-        "stockExchange": "New York Stock Exchange",
+        "stockExchangeName": "New York Stock Exchange",
         "topStocks": [
             {
                 "code": "AHT",
@@ -63,7 +63,7 @@
     },
     {
         "code": "NASDAQ",
-        "stockExchange": "Nasdaq",
+        "stockExchangeName": "Nasdaq",
         "topStocks": [
             {
                 "code": "AMD",

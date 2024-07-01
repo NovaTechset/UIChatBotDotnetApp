@@ -1,0 +1,16 @@
+﻿@model List<UIStockChatbot.Models.StockExchange>
+<h1>Select a Stock Exchange</h1>
+@if (Model == null || !Model.Any())
+{
+    <p>No stock exchanges available.</p>
+}
+else
+{
+    <p>Number of stock exchanges: @Model.Count</p>
+    <ul>
+        @foreach (var exchange in Model)
+        {
+            <li><a href="@Url.Action("StockMenu", new { code = exchange.Code })">@exchange.StockExchangeName</a></li>
+        }
+    </ul>
+}

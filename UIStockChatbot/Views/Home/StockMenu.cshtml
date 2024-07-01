@@ -1,0 +1,9 @@
+﻿@model UIStockChatbot.Models.StockExchange
+<h1>@Model.StockExchangeName</h1>
+<ul>
+    @foreach (var stock in Model.TopStocks)
+    {
+        <li><a href="@Url.Action("StockDetails", new { exchangeCode = Model.Code, stockCode = stock.Code })">@stock.StockName</a></li>
+    }
+</ul>
+<a href="@Url.Action("Index")">Back to Home</a>
